@@ -6,7 +6,7 @@ const ItemsApiService = {
     return fetch(`${config.API_ENDPOINT}/items`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
-      },
+      }
     })
       .then((response) => {
         if (!response.ok) {
@@ -16,7 +16,7 @@ const ItemsApiService = {
       });
   },
   getItemById(itemid) {
-    return fetch(`${config.API_ENDPOINT}/events/${itemid}`, {
+    return fetch(`${config.API_ENDPOINT}/items/${itemid}`, {
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
@@ -29,7 +29,7 @@ const ItemsApiService = {
       });
   },
   addItem(newItem) {
-    return fetch(`${config.API_ENDPOINT}/events`, {
+    return fetch(`${config.API_ENDPOINT}/items`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
