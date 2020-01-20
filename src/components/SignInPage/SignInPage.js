@@ -22,23 +22,23 @@ export default class SignInPage extends React.Component{
             email.value = '';
             password.value = '';
             TokenService.saveAuthToken(res.authToken);
-            UsersApiService.getAllEventsForUser()
-            .then(usersData => {
+            UsersApiService.getActiveUsersStats()
+            .then((usersData) => {
                 ActiveUserService.saveUserData(usersData);
+                this.context.clearErrorMessage();
+                this.context.getActiveUsersStats()
+                this.context.getAllItems();
+                history.push(`/dashboard/${usersData.stats.gamertag}`);
             })
-            this.context.updateSelectedUserState(usersData);
-            this.context.clearErrorMessage();
-            history.push(`/dashboard`); 
          })
          .catch(res => {
             this.context.updateErrorMessage('Oops: '+ res.error);
             this.context.scrollToErrorMessage();
          })
     }
-
     render(){
         return(
-            <form onSubmit={this.handleSubmit} id="signin-form">
+            <form onSubmit={this.handleSubmitJwtAuth} id="signin-form">
                 <div className="error-message">{!!this.context.errorMessage && this.context.errorMessage}</div>
                 <div>
                     <label htmlFor="email">Email:</label>
