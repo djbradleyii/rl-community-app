@@ -1,17 +1,18 @@
 import React from 'react';
 
 const ContextManager = React.createContext({
-    selectedUser: {},
-    users: [],
-    inventory: [],
-    items: [],
-    trades: [],
-    teams: [],
-    updateSelectedUserState: () => {},
+    activeUserData: {},
+    allItems: [],
+    errorMessage: "",
+    successMessage: "",
+    getActiveUsersStats: () => {},
+    getAllItems: () => {},
     updateStatesTrades: () => {},
     removeTrade: () => {},
     updateErrorMessage: () => {},
     clearErrorMessage: () => {},
+    updateSuccessMessage: () => {},
+    clearSuccessMessage: () => {},
     scrollToErrorMessage: () => {}
 });
 
