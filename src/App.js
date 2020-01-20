@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import './App.css';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/Header/Header';
 import LandingPage from './components/LandingPage/LandingPage';
 import SignInPage from './components/SignInPage/SignInPage';
@@ -9,34 +8,44 @@ import Dashboard from './components/Dashboard/Dashboard';
 import InventoryForm from './components/InventoryForm/InventoryForm';
 import LogoutSuccessful from './components/LogoutSuccessful/LogoutSuccessful';
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import Trades from './components/Trades/Trades';
 import TeamBoard from './components/TeamBoard/TeamBoard';
 import Footer from './components/Footer/Footer';
 import ContextManager from '../src/context/context-manager';
+import ItemsApiService from '../src/services/items-api-service';
+import UsersApiService from '../src/services/users-api-service';
+import TokenService from './services/token-service';
+import './App.css';
 
-export default class App extends React.Component{
+class App extends React.Component{
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
-      selectedUser,
+      activeUserData: {},
+      allItems: [],
+      errorMessage: "",
+      successMessage: ""
     }
   }
 
-  updateSelectedUserState = (updateSelectedUserData) => {
-    this.setState({
-      selectedUser: updateSelectedUserData
+  getActiveUsersStats = () => {
+    UsersApiService.getActiveUsersStats()
+    .then((activeUserData) => {
+      this.setState({
+        activeUserData
+      })
+    })
+    .catch(res => {
+      this.context.updateErrorMessage('Oops: '+ res.error);
+      this.context.scrollToErrorMessage();
     })
   }
 
-  updateStatesTrades = (newTrades) => {
-    this.setState({
-      trades: [...trades, ...newTrades]
-    })
-  }
-
-  removeTrade = (newTrades) => {
-    this.setState({
-      trades: newTrades
+  getAllItems = () => {
+    ItemsApiService.getAllItems()
+    .then((allItems) => {
+      this.setState({
+        allItems
+      })
     })
   }
 
@@ -52,39 +61,65 @@ export default class App extends React.Component{
     });
   }
 
+  updateSuccessMessage = (msg) => {
+    console.log('got here too');
+    console.log(msg)
+    this.setState({
+      successMessage: msg
+    });
+  }
+
+  clearSuccessMessage = (msg) => {
+    this.setState({
+      successMessage: null
+    });
+  }
+
   scrollToErrorMessage = () => {
     window.scrollTo(0, 0);
   }
 
+  componentDidMount(){
+    if(TokenService.hasAuthToken()){
+      this.getActiveUsersStats();
+      this.getAllItems();
+    }
+  }
+
   render(){
     const contextValue = {
-      selectedUser: this.state.selectedUser,
-      updateSelectedUserState: this.updateSelectedUserState,
-      updateStatesTrades: this.updateStatesTrades,
-      removeTrade: this.removeTrade,
+      errorMessage: this.state.errorMessage,
+      successMessage: this.state.successMessage,
+      activeUserData: this.state.activeUserData,
+      getActiveUsersStats: this.getActiveUsersStats,
+      getAllItems: this.getAllItems,
+      allItems: this.state.allItems,
       updateErrorMessage: this.updateErrorMessage,
       clearErrorMessage: this.clearErrorMessage,
+      updateSuccessMessage: this.updateSuccessMessage,
+      clearSuccessMessage: this.clearSuccessMessage,
       scrollToErrorMessage: this.scrollToErrorMessage
     }
     
     return (
       <ContextManager.Provider value={contextValue}>
         <div className="App">
-          <Header />
+          <Route path='/' component={Header} />
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/signin" component={SignInPage}></Route>
           <Route exact path="/register" component={RegisterPage}></Route>
           <Route exact path="/dashboard/:gamertag" component={Dashboard}></Route>
           <Route exact path="/add-inventory-item" component={InventoryForm}></Route>
           <Switch>
-            <Route exact path="/signout" component={LogoutSuccessful}></Route>
+            <Route exact path="/logout" component={LogoutSuccessful}></Route>
             <Route exact path="/notfound" component={PageNotFound}></Route>
           </Switch>
-          <Route exact path="/trades" component={Trades}></Route>
           <Route exact path="/teams" component={TeamBoard}></Route>
-          <Footer />    
+          <Route path='/' component={Footer} />    
         </div>
       </ContextManager.Provider>
     );
   }
 }
+
+export default withRouter(App)
