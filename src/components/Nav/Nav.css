@@ -1,0 +1,35 @@
+.top-nav-container, .not-logged-in{
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.nav-link{
+    display: inline-block;
+    text-decoration: none;
+    list-style-type: none;
+    color: #000;
+    padding: 5px;
+}
+
+.nav-link:link, .nav-link:active{
+    color: black;
+}
+
+.nav-link:hover{
+    color: white;
+    background: grey;
+}
+
+@media only screen and (min-width: 500px){
+    .top-nav-container{
+        justify-content: space-evenly;
+        font-size: .9em;
+        /* width: 70%; */
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}

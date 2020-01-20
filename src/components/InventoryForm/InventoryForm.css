@@ -1,0 +1,70 @@
+#inventory-form{
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 8px;
+/*     background-color: #fcca46; */
+    color: black;
+/*     box-shadow: 3px 2px 2px rgba(0,0,0,.6); */
+    font-weight: bold;
+}
+
+#inventory-form{
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+}
+
+#inventory-form label{
+    font-size: .95em;
+    margin-right: 10px;
+}
+
+#inventory-form select{
+    margin-top: 5px;
+    margin-bottom: 5px;  
+}
+
+#inventory-form input{
+    margin: 5px;
+}
+
+.inventory div, .inventory select{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.inventory select{
+    width: 130px;
+}
+
+.inventory label{
+    align-self: center;
+}
+
+@media only screen and (min-width: 400px) {
+    #inventory-form{
+        width: 75%;
+        padding: 25px;
+    }
+
+  }
+
+@media only screen and (min-width: 600px) {
+    #inventory-form{
+        width: 500px;
+        padding: 25px;
+    }
+    
+    #inventory-form button{
+        width: 200px;
+        height: 35px;
+    }
+
+    #inventory-form select{
+        width: 200px;
+        height: 35px;
+    }
+}

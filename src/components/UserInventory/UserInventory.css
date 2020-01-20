@@ -1,0 +1,120 @@
+.trade-confirmed{
+    width: 100%;
+}
+
+.trade-confirmed button{
+    margin-top: 10px;
+    width: 100%;
+}
+
+/*MOBILE STYLES*/
+
+#inventory-search-form{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    grid-column: span 2;
+}
+
+.inventory-search-results{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+#inventory-search-form div{
+    width: 75px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.inventory-search-results > .row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inventory-search-results > .row > .column{
+    flex: 45%;
+    padding: 5px;
+}
+
+#inventory-search-form label[for*="item"]{
+    display:inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+#item-category, #item-color, #item-rarity, #item-attribute{
+    width: 72px;
+}
+
+.item-card{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,.3);
+}
+
+.item-card h3{
+    font-size: 14px;
+}
+
+.item-card p{
+    font-size: 12px;
+}
+
+.itemBtnContainer, .removeItemBtn{
+    width: 100%;
+    margin-top: auto;
+    font-size: 12px;
+}
+
+.removeItemBtn{
+    box-shadow: 1px 2px 3px rgba(0,0,0,.2);
+}
+
+.removeItemBtn:hover{
+    box-shadow: 1px 2px 3px rgba(25, 3, 151, 0.653);
+}
+
+/*DESkTOP STYLES*/
+
+@media only screen and (min-width: 500px){
+    .inventory-search-results > .row{
+        width: 525px;
+    }
+
+    .inventory-search-results{
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    #inventory-search-form{
+        margin: 0 auto;
+        margin-bottom: 5px;
+        justify-content: space-evenly;
+    }
+
+    #inventory-search-form div{
+        width: 75px;
+        font-size: .9em;
+    }
+
+    #item-category, #item-color, #item-rarity, #item-attribute{
+        width: 100%;
+    }
+
+    .card-attribute{
+        display: flex;
+    }
+
+    .card-attribute .column:nth-child(odd){
+        flex: 1;
+    }
+    
+} 

@@ -1,0 +1,90 @@
+#register-form{
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 8px;
+/*     background-color: #fcca46; */
+    color: black;
+/*     box-shadow: 3px 2px 2px rgba(0,0,0,.6); */
+    font-weight: bold;
+}
+
+#register-form{
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+}
+
+#register-form input{
+    display: block;
+    margin: 5px 0;
+    width: 100%;
+}
+
+#register-form textarea{
+    display: block;
+    width: 100%;
+    height: 65px;
+}
+
+#register-form select{
+    margin-top: 5px;
+    margin-bottom: 5px;  
+}
+
+#register-form label{
+    font-size: .95em;
+    margin-right: 10px;
+}
+
+@media only screen and (min-width: 400px) {
+    #register-form{
+        width: 75%;
+        padding: 25px;
+    }
+
+    #register-form fieldset li{
+        display: inline-block;
+        text-align: center;
+        width: 45%;
+    }
+
+    #register-form fieldset input{
+        width: 16px;
+        vertical-align: middle;
+    }
+  }
+
+
+@media only screen and (min-width: 600px) {
+    #register-form{
+        width: 500px;
+        padding: 25px;
+        font-size: 20px;
+    }
+    #register-form input{
+        height: 40px;
+    }
+    
+    #register-form button{
+        width: 200px;
+        height: 35px;
+    }
+
+    #register-form select{
+        width: 200px;
+        height: 35px;
+    }
+
+    #register-form fieldset li{
+        display: inline-block;
+        text-align: center;
+        width: 45%;
+    }
+
+    #register-form fieldset input{
+        width: 20px;
+        vertical-align: middle;
+    }
+}

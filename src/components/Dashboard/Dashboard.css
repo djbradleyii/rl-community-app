@@ -1,0 +1,85 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.user-team-requests{
+    margin-top: 10px;
+}
+
+.user-trades h2, .user-team-requests h2, .user-inventory h2{
+    font-size: 16px;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.card-attribute{
+    list-style-type: none;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+
+.card-attribute li{
+    margin-right: 10px;
+}
+
+.user-inventory{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+@media only screen and (min-width: 480px){
+    .dashboard{
+        max-width: 480px;
+    }
+
+    .user-trades h2, .user-team-requests h2, .user-inventory h2{
+        font-size: 1.7em;
+    }
+
+    .user-inventory h2, .user-info{
+        grid-column: span 2;
+    }
+    
+    .user-info{
+        list-style: none;
+    }
+}
+
+@media only screen and (min-width: 500px){
+    .user-inventory{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 75%;
+        grid-gap: 15px;
+        grid-column: span 2;
+        margin: 0 auto;
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (min-width: 700px){
+    .dashboard{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    .user-trades{
+        flex: 1;
+    }
+
+    .user-team-requests{
+        flex: 1;
+        margin-top: 0;
+    }
+
+    .user-inventory{
+        width: 63%;
+    }
+}
