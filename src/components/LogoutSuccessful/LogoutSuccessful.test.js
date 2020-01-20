@@ -7,7 +7,7 @@ it('renders LogoutSuccessful Component without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
       <BrowserRouter>
-      <LogoutSuccessful />
+        <LogoutSuccessful />
       </BrowserRouter>,
     div,
   );

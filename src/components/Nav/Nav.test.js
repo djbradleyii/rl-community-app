@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import LandingPage from './LandingPage';
+import Nav from './Nav';
 
-it('renders Landing Page Component without crashing', () => {
+it('renders Page Not Found Component without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-      <BrowserRouter>
-       <LandingPage />
-      </BrowserRouter>,
+    <BrowserRouter>
+      <Nav />
+    </BrowserRouter>,
     div,
   );
   ReactDOM.unmountComponentAtNode(div);
