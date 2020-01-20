@@ -9,7 +9,10 @@ const ContextManager = React.createContext({
     teams: [],
     updateSelectedUserState: () => {},
     updateStatesTrades: () => {},
-    removeTrade: () => {}
+    removeTrade: () => {},
+    updateErrorMessage: () => {},
+    clearErrorMessage: () => {},
+    scrollToErrorMessage: () => {}
 });
 
 export default ContextManager;
