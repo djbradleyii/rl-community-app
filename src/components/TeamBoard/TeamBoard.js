@@ -1,18 +1,20 @@
 import React from 'react';
 import ContextManager from '../../context/context-manager';
+import TeamsApiService from '../../services/teams-api-service';
 import './TeamBoard.css';
 
 export default class TeamBoard extends React.Component{
     static contextType = ContextManager;
 
     state = {
+        users: [],
         platform: "all",
         rank: "all",
         division: "all",
     }
 
     createTeamsList = () => {
-        let teams = this.context.users.filter((user) => {
+        let teams = this.state.users.filter((user) => {
             return user.lft;
         });
 
@@ -82,6 +84,19 @@ export default class TeamBoard extends React.Component{
         }, this.createTeamsList)
     }
 
+    componentDidMount(){
+        TeamsApiService.getAllUsersLookingForTeam()
+        .then((users) => {
+            this.setState({
+                users
+            })
+        })
+        .catch(res => {
+            this.context.updateErrorMessage('Oops: '+ res.error);
+            this.context.scrollToErrorMessage();
+        })
+    }
+
     render(){        
         return(
         <div>
@@ -90,10 +105,10 @@ export default class TeamBoard extends React.Component{
                     <label htmlFor="team-platform">Platform:</label>
                     <select id="team-platform" name="platform" onChange={this.updatePlatformState}>
                       <option value="all">All</option>
-                      <option value="pc">PC</option>
-                      <option value="ps4">PS4</option>
-                      <option value="switch">Nintendo Switch</option>
-                      <option value="xbox">Xbox One</option>
+                      <option value="PC">PC</option>
+                      <option value="PS4">PS4</option>
+                      <option value="Nintendo Switch">Nintendo Switch</option>
+                      <option value="Xbox One">Xbox One</option>
                     </select>
                 </div>
                 <div>
@@ -133,7 +148,6 @@ export default class TeamBoard extends React.Component{
                     </select>
                 </div>
             </form>
-            {/* !!this.state.events.length && this.renderContent() */}
             <div className="team-search-results">
                 {this.createTeamsList()}
             </div>
