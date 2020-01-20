@@ -1,4 +1,7 @@
 import React from 'react';
+import ContextManager from '../../context/context-manager';
+import allItems from '../../allItems';
+import ItemsApiService from '../../services/items-api-service';
 import './InventoryForm.css';
 
 export default class InventoryForm extends React.Component{
@@ -9,7 +12,7 @@ export default class InventoryForm extends React.Component{
     }
 
     proper = (word) => {
-        const toUpper = word.split(" ");
+        const toUpper = word.toLowerCase().split(" ");
 
         const completeWord = toUpper.map((word) => {
             return word.charAt(0).toUpperCase() + word.substring(1);
@@ -27,9 +30,9 @@ export default class InventoryForm extends React.Component{
 
     paintedApproved = () => {
         const category = this.state.category;
-        /* const paintedApprovedGroup = ["body", "decal", "rocket boost", "wheels", "toppers"];
-        const isApproved = paintedApprovedGroup.includes(category) */
-        if(category === "body" || category === "decal" || category === "rocket boost"|| category === "wheels" || category === "toppers"){
+        const paintedApprovedGroup = ["body", "decal", "rocket boost", "wheels", "toppers"];
+        const isApproved = paintedApprovedGroup.includes(category)
+        if(isApproved){
             return true;
         } else {
             return false;
@@ -64,19 +67,6 @@ export default class InventoryForm extends React.Component{
         )
     }
 
-    createColorsCheckboxes = () => {
-        const colors = this.state.colors;
-        const colorCheckboxes = colors.map((color, i) => {
-            return(
-                <div key={i}>
-                    <input type="checkbox" id={`color-${i}`} name={`color-${i}`} value={color} />
-                    <label htmlFor={`color-${i}`}>{this.proper(color)}</label>
-                </div> 
-            )
-        })
-        return colorCheckboxes;
-    }
-
     createColorsSelect = () => {
         const colors = this.state.colors;
         const colorSelect = colors.map((color, i) => {
@@ -97,7 +87,7 @@ export default class InventoryForm extends React.Component{
 
 
     createRarityOptions = () => {
-        const rarity = ["common", "uncommon", "rare", "very rare", "import", "exotic", "black market", "premium", "limited"];
+        const rarity = ["Common", "Uncommon", "Rare", "Very Rare", "Import", "Exotic", "Black Market", "Premium", "Limited"];
         const rarityOptions = rarity.map((rare, i) => {
             return <option key={i} value={rare}>{this.proper(rare)}</option>
         })
@@ -140,22 +130,28 @@ export default class InventoryForm extends React.Component{
         }
 
         const newInventoryItem = {
-            id: this.context.selectedUser.inventory.length + 1,
-            category: category.value,
-            name: categoryItem.value,
-            painted: colors,
-            rarity: inventoryRarity.value,
-            special_edition: inventorySpecialEdition,
-            certified: inventoryCertified
+            category: this.proper(category.value),
+            name: this.proper(categoryItem.value),
+            painted: colors ? this.proper(colors) : colors,
+            rarity: this.proper(inventoryRarity.value),
+            special_edition: inventorySpecialEdition ? this.proper(inventorySpecialEdition) : inventorySpecialEdition,
+            certified: inventoryCertified ? this.proper(inventoryCertified) : inventoryCertified
         }
-
-        this.context.selectedUser.inventory.push(newInventoryItem);
-        this.context.items.push(newInventoryItem);
+        ItemsApiService.addItem(newInventoryItem)
+        .then((newItem) => {
+            this.context.updateSuccessMessage("Item Added");
+            this.getActiveUsersStats()
+        })
+        .catch(res => {
+            this.context.updateErrorMessage('Oops: '+ res.error);
+            this.context.scrollToErrorMessage();
+        })
     }
 
     render(){
         return(
             <form id="inventory-form" onSubmit={this.handleInventorySubmission}>
+                 {this.context.successMessage ? <div className="success-message">{this.context.successMessage}</div> : ""}
                 <div className="info">*Required Fields</div>
                 <div className="inventory">
                     <div>
@@ -165,10 +161,7 @@ export default class InventoryForm extends React.Component{
                         </select>
                     </div>
                     {this.displayItems()}
-                    {this.paintedApproved() ? <section className="form-checkboxes">
-                        <label htmlFor="inventory-category">Colors:</label>
-                        {this.createColorsSelect()}
-                    </section> : "" }
+                    {this.paintedApproved() ? this.createColorsSelect() : "" }
                     <div>
                         <label htmlFor="inventory-rarity">Rarity:</label>
                         <select id="inventory-rarity" name="inventoryRarity">
