@@ -28,6 +28,19 @@ const UsersApiService = {
         return response.json();
       });
   },
+  getActiveUsersStats(userid) {
+    return fetch(`${config.API_ENDPOINT}/users/stats`, {
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((responseJson) => Promise.reject(responseJson));
+        }
+        return response.json();
+      });
+  },
   getAllItemsByUserId(userid) {
     return fetch(`${config.API_ENDPOINT}/users/${userid}`, {
       headers: {
@@ -61,7 +74,7 @@ const UsersApiService = {
   },
   deleteUser() {
     return fetch(`${config.API_ENDPOINT}/users`, {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'content-type': 'application/json',
         authorization: `Bearer ${TokenService.getAuthToken()}`,
