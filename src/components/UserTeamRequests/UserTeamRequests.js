@@ -1,12 +1,21 @@
 import React from 'react';
 import ContextManager from '../../context/context-manager';
 import './UserTeamRequests.css';
+import TeamsService from '../../services/teams-api-service';
 
 export default class UserTeamRequests extends React.Component{
     static contextType = ContextManager;
-    render(){
-        const myRank = this.context.selectedUser.stats.rank;
-        const teams = this.context.teams.filter((user) => {
+    constructor(props){
+        super(props);
+        this.state = {
+            myRank: "",
+            teams: []
+        }
+    }
+
+    getTeamCards = () => {
+        const myRank = this.context.activeUserData.stats.rank;
+        const teams = this.state.teams.filter((user) => {
             return user.rank === myRank;
         })
         const teamCards = teams.map((user, i) => {
@@ -28,11 +37,23 @@ export default class UserTeamRequests extends React.Component{
                 </article>
             )
         })
+        return teamCards;
+    }
 
+    componentDidMount(){
+        TeamsService.getAllUsersLookingForTeam()
+        .then((teams) => {
+            this.setState({
+                teams
+            })
+        })
+    }
+    
+    render(){
         return(
             <section className="user-team-requests">
                 <h2>Available Teams:</h2>
-                {teamCards}
+                {!!this.context.activeUserData.hasOwnProperty('stats') ? this.getTeamCards() : <p>No players with your rank are looking for teams. Check back later.</p>}
             </section>
         );
     }
