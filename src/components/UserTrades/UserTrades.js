@@ -16,34 +16,30 @@ export default class UserTrades extends React.Component{
     }
 
     render(){
-        const tradeCards = this.context.selectedUser.trades.map((trade, i) => {
-            const collection = [];
-            const user = this.context.users.find((user) => {
-                return trade.userid === user.id;
+        let tradeDetails = [];
+        if(this.context.allItems.length > 0 && this.context.activeUserData.hasOwnProperty('stats')){
+            tradeDetails = this.context.allItems.filter((itemDetails) => {
+                return itemDetails.userid !== this.context.activeUserData.stats.id;
             })
-            const tradeDetails = trade.items.map((item, k) => {
-                collection.push(item.id)
+            tradeDetails = tradeDetails.map((itemDetails, i) => {
                 return(
-                    <div key={k} className="trade-details">
-                        <p>Item: {item.name.toUpperCase()}</p>
-                        <p>{this.proper(item.rarity)} {this.proper(item.category)}</p>
-                        {item.painted ? <p>{item.painted.toUpperCase()} PAINTED</p> : " "}
-                        {item.certfied ? <p>{item.certfied.toUpperCase()} CERTIFIED</p> : " "}
-                        {item.special_edition ? <p>{item.special_edition.toUpperCase()} SPECIAL EDITION</p> : " "}
+                    <div key={i} className="trade-details">
+                        <article className="trade-card">
+                            <h3>Gamertag: {itemDetails.gamertag === this.context.activeUserData.stats.gamertag ? "Me" : itemDetails.gamertag}</h3>
+                            <p>Item: {itemDetails.name.toUpperCase()}</p>
+                            <p>{this.proper(itemDetails.rarity)} {this.proper(itemDetails.category)}</p>
+                            {itemDetails.painted ? <p>{itemDetails.painted.toUpperCase()} PAINTED</p> : " "}
+                            {itemDetails.certfied ? <p>{itemDetails.certfied.toUpperCase()} CERTIFIED</p> : " "}
+                            {itemDetails.special_edition ? <p>{itemDetails.special_edition.toUpperCase()} SPECIAL EDITION</p> : " "}
+                        </article>
                     </div>
                 )
-            })
-            return(
-                <article key={i} className="trade-card">
-                    <h3>Gamertag: {user.gamertag === this.context.selectedUser.stats.gamertag ? "Me" : user.gamertag}</h3>
-                    {tradeDetails}
-                </article>
-            )
-        });
+            });
+        }
         return(
             <section className="user-trades">
-                <h2>Trades</h2>
-                {tradeCards.length > 0 ? tradeCards : "New Trades found"}
+                <h2>Users Posted Inventory:</h2>
+                {tradeDetails.length > 0 ? tradeDetails : "No Trades found"}
             </section>
         );
     }
