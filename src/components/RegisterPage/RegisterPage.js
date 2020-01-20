@@ -1,20 +1,20 @@
 import React from 'react';
 import './RegisterPage.css';
 import ContextManager from '../../context/context-manager';
-import moment from 'moment';
-import users from '../../users';
+import AuthApiService from '../../services/auth-api-service';
 
 export default class RegisterPage extends React.Component{
     static contextType = ContextManager;
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { fname, lname, dob, platform, gamertag, rank, division, lft, email, password, passwordVerify} = e.target;
+        this.setState({ error: null });
+        const { fname, lname, platform, gamertag, rank, division, lft, email, password, passwordVerify} = e.target;
+        const { history } = this.props;
+
         let newUser = {
-            id: users.length + 1,
             fname: fname.value,
             lname: lname.value,
-            dob: moment(dob.value).format('MM/DD/YYYY'),
             platform: platform.value,
             gamertag: gamertag.value,
             rank: rank.value,
@@ -27,22 +27,38 @@ export default class RegisterPage extends React.Component{
         if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
             newUser.division = null;
         } else if (rank.value.toLowerCase() !== 'grand champion'.toLowerCase() && division.value === null ){
-            alert('You will have to update your division on the dashboard');
-            newUser.division = "I"
+            console.log('Add error here');
         }
 
         if(password.value === passwordVerify.value){
-            users.push(newUser);
-            const { history } = this.props;
-            history.push('/signin')
-        } else {
-            alert('Passwords must match');
-        }
+            AuthApiService.postUser(newUser)
+            .then((user) => {
+            fname.value = '';
+            lname.value = '';
+            platform.value = '';
+            gamertag.value = '';
+            rank.value = '';
+            division.value = '';
+            lft.value = '';
+            email.value = '';
+            password.value = '';
+            passwordVerify.value = '';
+            this.context.clearErrorMessage();
+            history.push(`/signin`);
+        })
+        .catch(res => {
+            this.context.updateErrorMessage('Oops: '+ res.error);
+            this.context.scrollToErrorMessage();
+        })
+    } else {
+        this.context.updateErrorMessage('Password must match');
+        this.context.scrollToErrorMessage();
     }
-
+}
     render(){
         return(
             <form id="register-form" onSubmit={this.handleSubmit} >
+                <div className="error-message">{!!this.context.errorMessage && this.context.errorMessage}</div>
                 <div className="info">*Required Fields</div>
                 <div>
                     <label htmlFor="fname">*First Name:</label>
@@ -53,20 +69,16 @@ export default class RegisterPage extends React.Component{
                     <input type="text" id="lname" placeholder="ex. Adams" name="lname" required/>
                 </div>
                 <div>
-                    <label htmlFor="dob">*Birth Date:</label>
-                    <input type="date" id="dob" name="dob" required/>
-                </div>
-                <div>
                     <label htmlFor="user-summary">Bio:</label>
                     <textarea id="user-summary" name="bio"></textarea>
                 </div>
                 <div>
                     <label htmlFor="platform">*Platform:</label>
-                    <select id="platform" name="platform" required>
-                        <option value="pc">PC</option>
-                        <option value="ps4">PS4</option>
-                        <option value="nintendo switch">Nintendo Switch</option>
-                        <option value="xbox one">Xbox One</option>
+                    <select id="platform" name="platform">
+                        <option value="PC">PC</option>
+                        <option value="PS4">PS4</option>
+                        <option value="Nintendo Switch">Nintendo Switch</option>
+                        <option value="Xbox One">Xbox One</option>
                     </select>
                 </div>
                 <div>
@@ -75,32 +87,32 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="register-rank">Rank:</label>
-                    <select id="register-rank" name="rank" required>
-                      <option value="grand champion">Grand Champion</option>
-                      <option value="champion III">Champion III</option>
-                      <option value="champion II">Champion II</option>
-                      <option value="champion I">Champion I</option>
-                      <option value="diamond III">Diamond III</option>
-                      <option value="diamond II">Diamond II</option>
-                      <option value="diamond I">Diamond I</option>
-                      <option value="platinum III">Platinum III</option>
-                      <option value="platinum II">Platinum II</option>
-                      <option value="platinum I">Platinum I</option>
-                      <option value="gold III">Gold III</option>
-                      <option value="gold II">Gold II</option>
-                      <option value="gold I">Gold I</option>
-                      <option value="silver III">Silver III</option>
-                      <option value="silver II">Silver II</option>
-                      <option value="silver I">Silver I</option>
-                      <option value="bronze III">Bronze III</option>
-                      <option value="bronze II">Bronze II</option>
-                      <option value="bronze I">Bronze I</option>
-                      <option value="unranked">Unranked</option>
+                    <select id="register-rank" name="rank">
+                      <option value="Grand Champion">Grand Champion</option>
+                      <option value="Champion III">Champion III</option>
+                      <option value="Champion II">Champion II</option>
+                      <option value="Champion I">Champion I</option>
+                      <option value="Diamond III">Diamond III</option>
+                      <option value="Diamond II">Diamond II</option>
+                      <option value="Diamond I">Diamond I</option>
+                      <option value="Platinum III">Platinum III</option>
+                      <option value="Platinum II">Platinum II</option>
+                      <option value="Platinum I">Platinum I</option>
+                      <option value="Gold III">Gold III</option>
+                      <option value="Gold II">Gold II</option>
+                      <option value="Gold I">Gold I</option>
+                      <option value="Silver III">Silver III</option>
+                      <option value="Silver II">Silver II</option>
+                      <option value="Silver I">Silver I</option>
+                      <option value="Bronze III">Bronze III</option>
+                      <option value="Bronze II">Bronze II</option>
+                      <option value="Bronze I">Bronze I</option>
+                      <option value="Unranked">Unranked</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="register-rank-division">Division:</label>
-                    <select id="register-rank-division" name="division" required>
+                    <select id="register-rank-division" name="division">
                         <option value={null}></option>
                         <option value="IV">IV</option>
                         <option value="III">III</option>
@@ -110,7 +122,7 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="register-lft">Looking for team?</label>
-                    <select id="register-lft" name="lft" required>
+                    <select id="register-lft" name="lft">
                         <option value={true}>Yes</option>
                         <option value={false}>No</option>
                     </select>
