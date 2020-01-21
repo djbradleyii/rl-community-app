@@ -7,9 +7,10 @@ export default class RegisterPage extends React.Component{
     static contextType = ContextManager;
 
     handleSubmit = (e) => {
+        this.context.clearErrorMessage();
         e.preventDefault();
         this.setState({ error: null });
-        const { fname, lname, platform, gamertag, rank, division, lft, email, password, passwordVerify} = e.target;
+        const { fname, lname, platform, gamertag, rocketid, rank, division, lft, email, password, passwordVerify} = e.target;
         const { history } = this.props;
 
         let newUser = {
@@ -17,6 +18,7 @@ export default class RegisterPage extends React.Component{
             lname: lname.value,
             platform: platform.value,
             gamertag: gamertag.value,
+            rocket_id: rocketid.value,
             rank: rank.value,
             division: division.value,
             lft: lft.value,
@@ -27,7 +29,8 @@ export default class RegisterPage extends React.Component{
         if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
             newUser.division = null;
         } else if (rank.value.toLowerCase() !== 'grand champion'.toLowerCase() && division.value === null ){
-            console.log('Add error here');
+            this.context.updateErrorMessage('Oops: Please add a division.');
+            return null
         }
 
         if(password.value === passwordVerify.value){
@@ -37,6 +40,7 @@ export default class RegisterPage extends React.Component{
             lname.value = '';
             platform.value = '';
             gamertag.value = '';
+            rocketid.value = '';
             rank.value = '';
             division.value = '';
             lft.value = '';
@@ -84,6 +88,10 @@ export default class RegisterPage extends React.Component{
                 <div>
                     <label htmlFor="gamertag">*Gamertag:</label>
                     <input type="text" id="gamertag" placeholder="ex. Savage Goalie 3024" name="gamertag" required/>
+                </div>
+                <div>
+                    <label htmlFor="rocketid">RocketID:</label>
+                    <input type="text" id="rocketid" placeholder="ex. SavageGoalie3024#123" name="rocketid" required/>
                 </div>
                 <div>
                     <label htmlFor="register-rank">Rank:</label>
