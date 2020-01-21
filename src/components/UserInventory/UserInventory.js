@@ -137,18 +137,16 @@ export default class UserInventory extends React.Component{
                         <label htmlFor="item-category">Category:</label>
                         <select id="item-category" name="category" onChange={this.updateCategoryState}>
                         <option value="all">All</option>
-                        <option value="blueprints">Blueprints</option>
                         <option value="body">Body</option>
                         <option value="decal">Decal</option>
                         <option value="paint finish">Paint Finish</option>
                         <option value="wheels">Wheels</option>
                         <option value="rocket boost">Rocket Boost</option>
-                        <option value="topper">Topper</option>
+                        <option value="toppers">Toppers</option>
                         <option value="antenna">Antenna</option>
                         <option value="goal explosion">Goal Explosion</option>
-                        <option value="trail">Trail</option>
+                        <option value="trails">Trails</option>
                         <option value="player banner">Player Banner</option>
-                        <option value="avatar border">Avatar Border</option>
                         <option value="engine audio">Engine Audio</option>
                         </select>
                     </div>
