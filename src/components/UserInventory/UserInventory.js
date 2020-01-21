@@ -140,16 +140,16 @@ export default class UserInventory extends React.Component{
                         <option value="blueprints">Blueprints</option>
                         <option value="body">Body</option>
                         <option value="decal">Decal</option>
-                        <option value="paint_finish">Paint Finish</option>
+                        <option value="paint finish">Paint Finish</option>
                         <option value="wheels">Wheels</option>
-                        <option value="rocket_boost">Rocket Boost</option>
+                        <option value="rocket boost">Rocket Boost</option>
                         <option value="topper">Topper</option>
                         <option value="antenna">Antenna</option>
-                        <option value="goal_explosion">Goal Explosion</option>
+                        <option value="goal explosion">Goal Explosion</option>
                         <option value="trail">Trail</option>
-                        <option value="player_banner">Player Banner</option>
-                        <option value="avatar_border">Avatar Border</option>
-                        <option value="engine_audio">Engine Audio</option>
+                        <option value="player banner">Player Banner</option>
+                        <option value="avatar border">Avatar Border</option>
+                        <option value="engine audio">Engine Audio</option>
                         </select>
                     </div>
                     <div>
