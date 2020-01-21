@@ -22,13 +22,14 @@ export default class SignInPage extends React.Component{
             email.value = '';
             password.value = '';
             TokenService.saveAuthToken(res.authToken);
+
             UsersApiService.getActiveUsersStats()
             .then((usersData) => {
                 ActiveUserService.saveUserData(usersData);
                 this.context.clearErrorMessage();
                 this.context.getActiveUsersStats()
                 this.context.getAllItems();
-                history.push(`/dashboard/${usersData.stats.gamertag}`);
+                history.push(`/dashboard`);
             })
          })
          .catch(res => {
