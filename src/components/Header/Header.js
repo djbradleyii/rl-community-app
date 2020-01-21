@@ -8,10 +8,9 @@ import './Header.css';
 export default class Header extends React.Component {
     static contextType = ContextManager;
     render(){
-        const gamertag = this.context.activeUserData.stats ? this.context.activeUserData.stats.gamertag : " ";
         return(
             <header>
-                {TokenService.hasAuthToken() ? <Link to={`/dashboard/${gamertag}`} className="main-header"><h1>Rocket League Community App</h1></Link> : <Link to="/" className="main-header"><h1>Rocket League Community App</h1></Link>}
+                {TokenService.hasAuthToken() ? <Link to={`/dashboard`} className="main-header"><h1>Rocket League Community App</h1></Link> : <Link to="/" className="main-header"><h1>Rocket League Community App</h1></Link>}
                 <Nav history={this.props.history}/>
             </header>
         )
