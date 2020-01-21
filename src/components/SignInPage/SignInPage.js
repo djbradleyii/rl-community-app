@@ -12,7 +12,7 @@ export default class SignInPage extends React.Component{
         e.preventDefault();
         this.setState({ error: null });
         const { email, password } = e.target;
-    
+        const submitBtn = document.querySelector('button[type="submit"]');
         AuthApiService.postLogin({
             email: email.value,
             password: password.value,
@@ -25,6 +25,7 @@ export default class SignInPage extends React.Component{
 
             UsersApiService.getActiveUsersStats()
             .then((usersData) => {
+                submitBtn.setAttribute('disabled', '');
                 ActiveUserService.saveUserData(usersData);
                 this.context.clearErrorMessage();
                 this.context.getActiveUsersStats()
@@ -35,6 +36,7 @@ export default class SignInPage extends React.Component{
          .catch(res => {
             this.context.updateErrorMessage('Oops: '+ res.error);
             this.context.scrollToErrorMessage();
+            submitBtn.setAttribute('disabled', false);
          })
     }
     render(){

@@ -9,6 +9,8 @@ export default class RegisterPage extends React.Component{
     handleSubmit = (e) => {
         this.context.clearErrorMessage();
         e.preventDefault();
+
+        const submitBtn = document.querySelector('button[type="submit"]');
         this.setState({ error: null });
         const { fname, lname, platform, gamertag, rocketid, rank, division, lft, email, password, passwordVerify, bio} = e.target;
         const { history } = this.props;
@@ -27,13 +29,6 @@ export default class RegisterPage extends React.Component{
             bio: bio.value
         }
 
-/*         if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
-            newUser.division = null;
-        } else if (rank.value.toLowerCase() !== 'grand champion'.toLowerCase() && division.value === null ){
-            this.context.updateErrorMessage('Oops: Please add a division.');
-            return null
-        } */
-
         if(password.value === passwordVerify.value){
             AuthApiService.postUser(newUser)
             .then((user) => {
@@ -49,12 +44,14 @@ export default class RegisterPage extends React.Component{
             password.value = '';
             passwordVerify.value = '';
             bio.value= '';
-            //this.context.clearErrorMessage();
-            history.push(`/signin`);
+            this.context.clearErrorMessage();
+            submitBtn.setAttribute('disabled', '');
+            history.push(`/registered`);
         })
         .catch(res => {
-           // this.context.updateErrorMessage('Oops: '+ res.error);
-            //this.context.scrollToErrorMessage();
+            this.context.updateErrorMessage('Oops: '+ res.error);
+            this.context.scrollToErrorMessage();
+            submitBtn.setAttribute('disabled', false);
         })
     } else {
         this.context.updateErrorMessage('Password must match');
