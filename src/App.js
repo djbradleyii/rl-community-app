@@ -15,6 +15,7 @@ import ItemsApiService from '../src/services/items-api-service';
 import UsersApiService from '../src/services/users-api-service';
 import TokenService from './services/token-service';
 import './App.css';
+import EditProfileForm from './components/EditProfileForm/EditProfileForm';
 
 class App extends React.Component{
   constructor(props){
@@ -62,8 +63,6 @@ class App extends React.Component{
   }
 
   updateSuccessMessage = (msg) => {
-    console.log('got here too');
-    console.log(msg)
     this.setState({
       successMessage: msg
     });
@@ -108,7 +107,8 @@ class App extends React.Component{
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/signin" component={SignInPage}></Route>
           <Route exact path="/register" component={RegisterPage}></Route>
-          <Route exact path="/dashboard/:gamertag" component={Dashboard}></Route>
+          <Route exact path="/dashboard" component={Dashboard}></Route>
+          <Route exact path="/edit/stats" component={EditProfileForm}></Route>
           <Route exact path="/add-inventory-item" component={InventoryForm}></Route>
           <Switch>
             <Route exact path="/logout" component={LogoutSuccessful}></Route>
