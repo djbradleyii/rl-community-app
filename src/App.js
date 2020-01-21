@@ -16,6 +16,7 @@ import UsersApiService from '../src/services/users-api-service';
 import TokenService from './services/token-service';
 import './App.css';
 import EditProfileForm from './components/EditProfileForm/EditProfileForm';
+import AccountCreated from '../src/components/AccountCreated/AccountCreated';
 
 class App extends React.Component{
   constructor(props){
@@ -105,6 +106,7 @@ class App extends React.Component{
         <div className="App">
           <Route path='/' component={Header} />
           <Route exact path="/" component={LandingPage}></Route>
+          <Route exact path='/registered' component={AccountCreated} />
           <Route exact path="/signin" component={SignInPage}></Route>
           <Route exact path="/register" component={RegisterPage}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
