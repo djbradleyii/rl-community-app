@@ -10,7 +10,7 @@ export default class RegisterPage extends React.Component{
         this.context.clearErrorMessage();
         e.preventDefault();
         this.setState({ error: null });
-        const { fname, lname, platform, gamertag, rocketid, rank, division, lft, email, password, passwordVerify} = e.target;
+        const { fname, lname, platform, gamertag, rocketid, rank, division, lft, email, password, passwordVerify, bio} = e.target;
         const { history } = this.props;
 
         let newUser = {
@@ -23,7 +23,8 @@ export default class RegisterPage extends React.Component{
             division: division.value,
             lft: lft.value,
             email: email.value,
-            password: password.value
+            password: password.value,
+            bio: bio.value
         }
 
         if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
@@ -47,6 +48,7 @@ export default class RegisterPage extends React.Component{
             email.value = '';
             password.value = '';
             passwordVerify.value = '';
+            bio.value= '';
             this.context.clearErrorMessage();
             history.push(`/signin`);
         })
