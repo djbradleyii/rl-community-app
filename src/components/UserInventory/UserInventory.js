@@ -18,9 +18,18 @@ export default class UserInventory extends React.Component{
     }
 
     removeItem(itemid){
+        this.context.clearErrorMessage();
+        this.context.clearSuccessMessage();
         ItemsApiService.removeItem(itemid)
         .then((itemRemoved) => {
+            this.context.clearErrorMessage();
+            this.context.updateSuccessMessage("Item Removed");
             this.context.getActiveUsersStats();
+        })
+        .catch(res => {
+            this.context.clearSuccessMessage();
+            this.context.updateErrorMessage('Oops: ' + res.error);
+            this.context.scrollToErrorMessage();
         })
     }
 
@@ -116,10 +125,13 @@ export default class UserInventory extends React.Component{
             attribute: e.target.value
         }, this.getCards)
     } 
+
     render(){
         return(
             <section className="user-inventory">
                 <h2>Inventory</h2>
+                {this.context.errorMessage ? <div className="error-message">{this.context.errorMessage}</div> : ""}
+                {this.context.successMessage ? <div className="success-message">{this.context.successMessage}</div> : ""}
                 <form id="inventory-search-form">
                     <div>
                         <label htmlFor="item-category">Category:</label>
