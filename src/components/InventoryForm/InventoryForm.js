@@ -111,6 +111,8 @@ export default class InventoryForm extends React.Component{
     }
 
     handleInventorySubmission = (e) => {
+        this.context.clearErrorMessage();
+        this.context.clearSuccessMessage();
         e.preventDefault();
         let { category, categoryItem, colors, inventoryRarity, inventoryCertified, inventorySpecialEdition } = e.target;
         if(!colors || colors.value === "Not Painted"){
@@ -137,21 +139,30 @@ export default class InventoryForm extends React.Component{
             special_edition: inventorySpecialEdition ? this.proper(inventorySpecialEdition) : inventorySpecialEdition,
             certified: inventoryCertified ? this.proper(inventoryCertified) : inventoryCertified
         }
+
         ItemsApiService.addItem(newInventoryItem)
         .then((newItem) => {
+            this.context.clearErrorMessage();
             this.context.updateSuccessMessage("Item Added");
-            this.getActiveUsersStats()
+            this.context.getActiveUsersStats();
+            
         })
         .catch(res => {
-            this.context.updateErrorMessage('Oops: '+ res.error);
+            this.context.clearSuccessMessage();
+            this.context.updateErrorMessage('Oops: ' + res.error);
             this.context.scrollToErrorMessage();
         })
+    }
+
+    componentWillUnmount(){
+        this.context.clearErrorMessage();
+        this.context.clearSuccessMessage();
     }
 
     render(){
         return(
             <form id="inventory-form" onSubmit={this.handleInventorySubmission}>
-                 {this.context.successMessage ? <div className="success-message">{this.context.successMessage}</div> : ""}
+                {this.context.errorMessage ? <div className="error-message">{this.context.errorMessage}</div> : ""}
                 <div className="info">*Required Fields</div>
                 <div className="inventory">
                     <div>
@@ -185,6 +196,7 @@ export default class InventoryForm extends React.Component{
                         </div> : " "
                     }
                 </div>
+                {this.context.successMessage ? <div className="success-message">{this.context.successMessage}</div> : ""}
                 <div>
                     <button type="submit">Submit</button>
                 </div>    
