@@ -27,12 +27,12 @@ export default class RegisterPage extends React.Component{
             bio: bio.value
         }
 
-        if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
+/*         if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
             newUser.division = null;
         } else if (rank.value.toLowerCase() !== 'grand champion'.toLowerCase() && division.value === null ){
             this.context.updateErrorMessage('Oops: Please add a division.');
             return null
-        }
+        } */
 
         if(password.value === passwordVerify.value){
             AuthApiService.postUser(newUser)
@@ -49,12 +49,12 @@ export default class RegisterPage extends React.Component{
             password.value = '';
             passwordVerify.value = '';
             bio.value= '';
-            this.context.clearErrorMessage();
+            //this.context.clearErrorMessage();
             history.push(`/signin`);
         })
         .catch(res => {
-            this.context.updateErrorMessage('Oops: '+ res.error);
-            this.context.scrollToErrorMessage();
+           // this.context.updateErrorMessage('Oops: '+ res.error);
+            //this.context.scrollToErrorMessage();
         })
     } else {
         this.context.updateErrorMessage('Password must match');
