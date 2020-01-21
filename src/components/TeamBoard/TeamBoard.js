@@ -32,7 +32,7 @@ export default class TeamBoard extends React.Component{
 
         if(this.state.division !== "all"){
             teams = teams.filter((user) => {
-                return user.division.toLowerCase() === this.state.division.toLowerCase();
+                return user.division === this.state.division;
             })
         }
 
@@ -49,10 +49,10 @@ export default class TeamBoard extends React.Component{
                         <div className="team-column"><p>Rank:</p></div>
                         <div className="team-column"><p>{user.rank}</p></div>
                     </div>
-                    <div className="team-card-division">
+{user.division ?                    <div className="team-card-division">
                         <div className="team-column"><p>Division:</p></div>
                         <div className="team-column"><p>{user.division}</p></div>
-                    </div>
+                    </div>: " "}
                 </article>
             )
         })
