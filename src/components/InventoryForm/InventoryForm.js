@@ -137,7 +137,7 @@ export default class InventoryForm extends React.Component{
             painted: colors ? this.proper(colors) : colors,
             rarity: this.proper(inventoryRarity.value),
             special_edition: inventorySpecialEdition ? this.proper(inventorySpecialEdition) : inventorySpecialEdition,
-            certified: inventoryCertified ? this.proper(inventoryCertified) : inventoryCertified
+            certified: inventoryCertified
         }
 
         ItemsApiService.addItem(newInventoryItem)
