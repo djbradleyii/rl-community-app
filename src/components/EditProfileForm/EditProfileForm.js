@@ -23,11 +23,10 @@ export default class EditProfileForm extends React.Component{
             bio: bio.value
         }
 
-        if(rank.value.toLowerCase() === 'grand champion'.toLowerCase() && division.value !== null){
+        if(updateUser.rank.toLowerCase() === 'grand champion'.toLowerCase()){
             updateUser.division = null;
-        } else if (rank.value.toLowerCase() !== 'grand champion'.toLowerCase() && division.value === null ){
-            this.context.updateErrorMessage('Oops: You need to add a division');
-            return null;
+        } else if (updateUser.rank.toLowerCase() !== 'grand champion'.toLowerCase() && (updateUser.division === null || updateUser.division === "") ){
+            updateUser.division = "I";
         }
 
             UsersApiService.updateUserById(updateUser)
