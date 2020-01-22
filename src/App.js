@@ -107,7 +107,7 @@ class App extends React.Component{
     
     return (
       <ContextManager.Provider value={contextValue}>
-        <div className="App">
+        <main role="main" className="App">
           <Route path='/' component={Header} />
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path='/registered' component={AccountCreated} />
@@ -122,7 +122,7 @@ class App extends React.Component{
           </Switch>
           <Route exact path="/teams" component={TeamBoard}></Route>
           <Route path='/' component={Footer} />    
-        </div>
+        </main>
       </ContextManager.Provider>
     );
   }
