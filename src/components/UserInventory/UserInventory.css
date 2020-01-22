@@ -13,7 +13,6 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
-    grid-column: span 2;
 }
 
 .inventory-search-results{
@@ -26,8 +25,7 @@
 
 #inventory-search-form div{
     width: 75px;
-    font-size: 14px;
-    margin-right: 5px;
+    font-size: 12px;
 }
 
 .inventory-search-results > .row{
@@ -54,14 +52,22 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
     padding: 5px;
     border-radius: 5px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,.3);
+    border: 1px solid black;
+    box-shadow: 1px 2px 4px rgba(0,0,0,.3);
+    background-color: white;
 }
 
 .item-card h3{
+    padding: 5px;
     font-size: 14px;
+}
+
+.item-card-info{
+    margin: 2px 0;
+    padding: 2px 0;
+    font-weight: bold;
 }
 
 .item-card p{
@@ -84,6 +90,14 @@
 
 /*DESkTOP STYLES*/
 
+@media only screen and (min-width: 480px){
+    .item-card{
+        max-width: 275px;
+        margin: 10px auto;
+    }
+}
+
+
 @media only screen and (min-width: 500px){
     .inventory-search-results > .row{
         width: 525px;
@@ -96,13 +110,14 @@
 
     #inventory-search-form{
         margin: 0 auto;
-        margin-bottom: 5px;
+        grid-column: span 2;
         justify-content: space-evenly;
     }
 
     #inventory-search-form div{
         width: 75px;
         font-size: .9em;
+        margin: 0 5px;
     }
 
     #item-category, #item-color, #item-rarity, #item-attribute{
@@ -118,3 +133,7 @@
     }
     
 } 
+
+@media only screen and (min-width: 700px){
+
+}

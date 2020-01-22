@@ -2,15 +2,25 @@ header h1{
     font-size: 20px;
     text-align: center;
     padding: 5px;
+    font-family: 'Rammetto One', cursive;
+    letter-spacing: 1px;
+    color: #79A5A9;
 }
 
-header a, header a:link, header a:visited{
+header{
+    width: 100%;
+    background-color: #000B28;
+    padding: 2px;
+    padding-top: 30px;
+}
+
+.main-header, .main-header:link, .main-header:visited{
     text-decoration: none;
     color: black;
 }
 
-header a:hover{
-    text-shadow: 2px 2px 3px rgba(38, 0, 255, 0.2);
+.main-header:hover{
+    text-shadow: 4px 6px 2px rgba(0, 0, 0, 1);
 }
 
 

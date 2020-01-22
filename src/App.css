@@ -7,22 +7,36 @@
 body{
   max-width: 960px;
   margin: 0 auto;
+  background-image: url('imgs/rl-dbg-img.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f0f0f0;
 }
 
 .App{
-  padding: 5px;
+  max-width: 960px;
+  margin: 0 auto;
+  background-color: #f0f0f0;
 }
 
 button{
-  border: 1px solid black;
-  background-color: grey;
+  border: 1px solid #052F5F;
   margin-top: 10px;
   padding: 5px;
+  background-color: #FAA41A;
+  color: #02010A;
+  font-weight: bold;
+}
+
+button:hover{
+  background-color: #052F5F;
   color: white;
 }
 
 .error-message{
-  color: #590004;
+  color: #69140E;
   font-size: .7em;
   margin-bottom: 15px;
 }
@@ -32,10 +46,8 @@ button{
   padding: 5px;
   font-size: .7em;
   border-radius: 8px;
-/*   background-color: #4f6d7a;
-  color: white; */
+  color: white;
   line-height: 20px;
-/*   box-shadow: 3px 2px 4px rgba(0,0,0,.7); */
 }
 
 .info-password{
@@ -63,4 +75,22 @@ button{
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
+}
+
+h2, h3 {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
+  background-color: #000B28;
+  padding: 2px;
+  color: white;
+}
+
+@media only screen and (min-width: 500px){
+  body{
+    background-image: url('imgs/rl-mbg-img.jpg');
+  }
+
+  button{
+    font-size: 16px;
+  }
 }
