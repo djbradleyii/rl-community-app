@@ -55,7 +55,7 @@ class App extends React.Component{
     this.setState({
       errorMessage: error
     }, () => {
-      setTimeout(() => this.clearSuccessMessage(), 1000)
+      setTimeout(() => this.clearSuccessMessage(), 10000)
     });
   }
 
