@@ -10,7 +10,6 @@ export default class RegisterPage extends React.Component{
         this.context.clearErrorMessage();
         e.preventDefault();
 
-        const submitBtn = document.querySelector('button[type="submit"]');
         this.setState({ error: null });
         const { fname, lname, platform, gamertag, rocketid, rank, division, lft, email, password, passwordVerify, bio} = e.target;
         const { history } = this.props;
@@ -29,6 +28,12 @@ export default class RegisterPage extends React.Component{
             bio: bio.value
         }
 
+        if(newUser.rank === "Grand Champion"){
+            newUser.division = null;
+        } else if(newUser !== "Grand Champion" && (newUser.division === null || newUser.division === "")){
+            newUser.division = "I";
+        }
+
         if(password.value === passwordVerify.value){
             AuthApiService.postUser(newUser)
             .then((user) => {
@@ -45,18 +50,16 @@ export default class RegisterPage extends React.Component{
             passwordVerify.value = '';
             bio.value= '';
             this.context.clearErrorMessage();
-            submitBtn.setAttribute('disabled', '');
             history.push(`/registered`);
         })
         .catch(res => {
             this.context.updateErrorMessage('Oops: '+ res.error);
             this.context.scrollToErrorMessage();
-            submitBtn.setAttribute('disabled', false);
         })
     } else {
         this.context.updateErrorMessage('Password must match');
         this.context.scrollToErrorMessage();
-    }
+    } 
 }
     render(){
         return(
@@ -65,7 +68,7 @@ export default class RegisterPage extends React.Component{
                 <div className="info">*Required Fields</div>
                 <div>
                     <label htmlFor="fname">*First Name:</label>
-                    <input type="text" id="fname" placeholder="ex. Ken" name="fname" required />
+                    <input type="text" id="fname" placeholder="ex. Ken" name="fname" required/>
                 </div>
                 <div>
                     <label htmlFor="lname">*Last Name:</label>
@@ -77,7 +80,7 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="platform">*Platform:</label>
-                    <select id="platform" name="platform">
+                    <select id="platform" name="platform" required>
                         <option value="PC">PC</option>
                         <option value="PS4">PS4</option>
                         <option value="Nintendo Switch">Nintendo Switch</option>
@@ -90,11 +93,11 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="rocketid">RocketID:</label>
-                    <input type="text" id="rocketid" placeholder="ex. SavageGoalie3024#123" name="rocketid" required/>
+                    <input type="text" id="rocketid" placeholder="ex. SavageGoalie3024#123" name="rocketid" />
                 </div>
                 <div>
                     <label htmlFor="register-rank">Rank:</label>
-                    <select id="register-rank" name="rank">
+                    <select id="register-rank" name="rank" required>
                       <option value="Grand Champion">Grand Champion</option>
                       <option value="Champion III">Champion III</option>
                       <option value="Champion II">Champion II</option>
@@ -119,7 +122,7 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="register-rank-division">Division:</label>
-                    <select id="register-rank-division" name="division">
+                    <select id="register-rank-division" name="division" required>
                         <option value={null}></option>
                         <option value="IV">IV</option>
                         <option value="III">III</option>
@@ -129,23 +132,23 @@ export default class RegisterPage extends React.Component{
                 </div>
                 <div>
                     <label htmlFor="register-lft">Looking for team?</label>
-                    <select id="register-lft" name="lft">
+                    <select id="register-lft" name="lft" required>
                         <option value={true}>Yes</option>
                         <option value={false}>No</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="email">*Email:</label>
-                    <input type="email" id="email" name="email" placeholder="ex. myemailaddress@email.com" required />
+                    <input type="email" id="email" name="email" placeholder="ex. myemailaddress@email.com"  required/>
                 </div>
                 <div>
                     <div><p className="info info-password">Your password must contain 1 number, 1 capital letter, 1 special character (!@#$%^&amp;) and it must be at least 8 characters long.</p></div>
                     <label htmlFor="password">*Password:</label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="password"  required/>
                 </div>
                 <div>
                     <label htmlFor="passwordVerify">*Verify Password:</label>
-                    <input type="password" id="passwordVerify" name="passwordVerify" required />
+                    <input type="password" id="passwordVerify" name="passwordVerify"  required/>
                 </div>
                 <div>
                     <button type="submit">Submit</button>
