@@ -84,12 +84,12 @@ export default class UserInventory extends React.Component{
                 <article key={i} className="item-card">
                     <h3>{item.name.toUpperCase()}</h3>
                     <div className="card-rarity">
-                        {item.rarity ? <p>{this.proper(item.rarity)} {this.proper(item.category)}</p>: ""}
+                        {item.rarity ? <p className="item-card-info">{this.proper(item.rarity)} {this.proper(item.category)}</p>: ""}
                     </div>
                     {item.painted || item.certified || item.special_edition ? <ul className="row card-attribute">
-                        {item.certified ? <li>{item.certified.toUpperCase()} CERTIFIED</li> : " "}
-                        {item.painted ? <li>{item.painted.toUpperCase()} PAINTED</li> : " "}
-                        {item.special_edition ? <li>{item.special_edition.toUpperCase()} SPECIAL EDITION</li> : " "}
+                        {item.certified ? <li className="item-card-info">{item.certified.toUpperCase()} CERTIFIED</li> : " "}
+                        {item.painted ? <li className="item-card-info">{item.painted.toUpperCase()} PAINTED</li> : " "}
+                        {item.special_edition ? <li className="item-card-info">{item.special_edition.toUpperCase()} SPECIAL EDITION</li> : " "}
                     </ul> : " "}
                     <div className="itemBtnContainer"><button className="removeItemBtn" onClick={() => this.removeItem(item.id)}>Remove Item</button></div>
                 </article>
