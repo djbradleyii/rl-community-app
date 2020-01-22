@@ -29,18 +29,7 @@ class App extends React.Component{
     }
   }
 
-  getActiveUsersStats = () => {
-    UsersApiService.getActiveUsersStats()
-    .then((activeUserData) => {
-      this.setState({
-        activeUserData
-      })
-    })
-    .catch(res => {
-      this.context.updateErrorMessage('Oops: '+ res.error);
-      this.context.scrollToErrorMessage();
-    })
-  }
+
 
   getAllItems = () => {
     ItemsApiService.getAllItems()
@@ -83,6 +72,19 @@ class App extends React.Component{
     window.scrollTo(0, 0);
   }
 
+  getActiveUsersStats = () => {
+    UsersApiService.getActiveUsersStats()
+    .then((activeUserData) => {
+      this.setState({
+        activeUserData
+      })
+    })
+    .catch(res => {
+      this.updateErrorMessage('Oops: '+ res.error);
+      this.scrollToErrorMessage();
+    })
+  }
+  
   componentDidMount(){
     if(TokenService.hasAuthToken()){
       this.getActiveUsersStats();
