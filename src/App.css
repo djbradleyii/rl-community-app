@@ -13,12 +13,14 @@ body{
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   background-color: #f0f0f0;
+  background-position: center center;
 }
 
 .App{
   max-width: 960px;
   margin: 0 auto;
   background-color: #f0f0f0;
+  min-height: 100vh;
 }
 
 button{
@@ -36,9 +38,10 @@ button:hover{
 }
 
 .error-message{
-  color: #69140E;
   font-size: .7em;
   margin-bottom: 15px;
+  color: #69140E;
+  padding: 10px;
 }
 
 .info{
@@ -54,16 +57,6 @@ button:hover{
   margin-top: 22px;
   margin-bottom: 10px;
 }
-
-/* .search-info{
-   margin-bottom: 15px;
-  padding: 10px;
-  font-size: .8em;
-  border-radius: 8px;
-   background-color: #4f6d7a; 
-   box-shadow: 3px 2px 4px rgba(0,0,0,.7); 
-   color: white;
-} */
 
 .form-checkboxes > label{
   display: inline-block;
