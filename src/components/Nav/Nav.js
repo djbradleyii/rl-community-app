@@ -15,18 +15,22 @@ function Nav(props) {
     const authorizationStatus = TokenService.hasAuthToken();
     if (authorizationStatus) {
       return (
-        <nav role="navigation" className="top-nav-container">
-            <Link to={`/dashboard`} className="nav-link"><li>Dashboard</li></Link>
-            <Link to={`/add-inventory-item`} className="nav-link"><li>Add Inventory</li></Link>
-            <Link to={`/teams`} className="nav-link"><li>Team Board</li></Link>
-            <Link to={`/logout`} className="nav-link" onClick={handleLogoutClick}><li>Logout</li></Link>
+        <nav role="navigation">
+          <ul className="top-nav-container">
+            <li><Link to={`/dashboard`} className="nav-link">Dashboard</Link></li>
+            <li><Link to={`/add-inventory-item`} className="nav-link">Add Inventory</Link></li>
+            <li><Link to={`/teams`} className="nav-link">Team Board</Link></li>
+            <li><Link to={`/logout`} className="nav-link" onClick={handleLogoutClick}>Logout</Link></li>
+          </ul>
         </nav>
       );
     }
     return (
-      <nav role="navigation" className="not-logged-in">
-        <Link to="/signin" className="nav-link">Sign In</Link>
-        <Link to="/register" className="nav-link">Register</Link>
+      <nav role="navigation">
+        <ul className="not-logged-in">
+          <li><Link to="/signin" className="nav-link">Sign In</Link></li>
+          <li><Link to="/register" className="nav-link">Register</Link></li>
+        </ul>
       </nav>
     );
   }
