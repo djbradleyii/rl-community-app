@@ -42,11 +42,11 @@ export default class SignInPage extends React.Component{
                 <div className="error-message">{!!this.context.errorMessage && this.context.errorMessage}</div>
                 <div>
                     <label htmlFor="email">Email:</label>
-                    <input type="text" id="email" name="email" />
+                    <input type="text" id="email" name="email" required/>
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" />
+                    <input type="password" id="password" name="password" required/>
                 </div>
                 <div>
                     <button type="submit">Sign In</button>
