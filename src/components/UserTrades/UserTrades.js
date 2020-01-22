@@ -39,7 +39,7 @@ export default class UserTrades extends React.Component{
         return(
             <section className="user-trades">
                 <h2>Users Posted Inventory:</h2>
-                {tradeDetails.length > 0 ? tradeDetails : "No Trades found"}
+                {tradeDetails.length > 0 ? tradeDetails : <p className="no-results">No Trades found</p>}
             </section>
         );
     }
