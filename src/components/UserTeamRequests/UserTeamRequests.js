@@ -15,8 +15,9 @@ export default class UserTeamRequests extends React.Component{
 
     getTeamCards = () => {
         const myRank = this.context.activeUserData.stats.rank;
+        const myID = this.context.activeUserData.stats.id;
         const teams = this.state.teams.filter((user) => {
-            return user.rank === myRank;
+            return user.rank === myRank && user.id !== myID;
         })
         const teamCards = teams.map((user, i) => {
             return(
@@ -53,7 +54,7 @@ export default class UserTeamRequests extends React.Component{
         return(
             <section className="user-team-requests">
                 <h2>Available Teams:</h2>
-                {!!this.context.activeUserData.hasOwnProperty('stats') ? this.getTeamCards() : <p>No players with your rank are looking for teams. Check back later.</p>}
+                {!!this.context.activeUserData.hasOwnProperty('stats') && this.getTeamCards().length !== 0 ? this.getTeamCards() : <p className="no-results">No players with your rank are looking for teams.</p>}
             </section>
         );
     }
