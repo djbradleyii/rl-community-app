@@ -39,7 +39,7 @@ export default class UserInfo extends React.Component{
 
     updateSelectedUser = () => {
         const { match } = this.props;
-        const userid = match.params.userid;
+        const userid = match ? match.params.userid : "";
         UsersApiService.getUserById(userid)
         .then((userData) => {
             this.setState({
