@@ -41,7 +41,8 @@ button:hover{
 .error-message{
   font-size: .7em;
   margin-bottom: 15px;
-  color: #69140E;
+  color: #f1f227;
+  font-weight: bold;
   padding: 10px;
 }
 
