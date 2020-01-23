@@ -1,5 +1,6 @@
 import React from 'react';
 import ContextManager from '../../context/context-manager';
+import { Link } from 'react-router-dom';
 import './UserTrades.css';
 
 export default class UserTrades extends React.Component{
@@ -25,7 +26,7 @@ export default class UserTrades extends React.Component{
                 return(
                     <div key={i} className="trade-details">
                         <article className="trade-card">
-                            <h3>Gamertag: {itemDetails.gamertag === this.context.activeUserData.stats.gamertag ? "Me" : itemDetails.gamertag}</h3>
+                            <Link to={`/userdata/${itemDetails.userid}`} className="userdata-link"><h3>Gamertag: {itemDetails.gamertag}</h3></Link>
                             <p>Item: {itemDetails.name.toUpperCase()}</p>
                             <p>{this.proper(itemDetails.rarity)} {this.proper(itemDetails.category)}</p>
                             {itemDetails.painted ? <p>{itemDetails.painted.toUpperCase()} PAINTED</p> : " "}
