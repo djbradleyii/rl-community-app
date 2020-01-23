@@ -8,7 +8,7 @@ export default class InventoryForm extends React.Component{
     static contextType = ContextManager;
     state = {
         category: "body",
-        colors: ["black", "burnt sienna", "cobalt", "crimson", "forest green", "grey", "lime", "orange", "pink", "purple", "saffron", "sky blue", "titanium white"]
+        colors: ["black", "burnt sienna", "cobalt", "crimson", "forest green", "grey", "lime", "orange", "pink", "purple", "saffron", "sky blue", "titanium white"].sort()
     }
 
     proper = (word) => {
@@ -30,7 +30,7 @@ export default class InventoryForm extends React.Component{
 
     paintedApproved = () => {
         const category = this.state.category;
-        const paintedApprovedGroup = ["body", "decal", "rocket boost", "wheels", "toppers"];
+        const paintedApprovedGroup = ["body", "decal", "rocket boost", "wheels", "toppers"].sort();
         const isApproved = paintedApprovedGroup.includes(category)
         if(isApproved){
             return true;
@@ -40,7 +40,7 @@ export default class InventoryForm extends React.Component{
     }
 
     createCategoryOptions = () => {
-        const category = ["body", "decal", "paint finish", "wheels", "rocket boost", "toppers", "antenna", "goal explosion", "trails", "player banner", "engine audio"];
+        const category = ["body", "decal", "paint finish", "wheels", "rocket boost", "toppers", "antenna", "goal explosion", "trails", "player banner", "engine audio"].sort();
         const categorySelect = category.map((category, i) => {
             return (
                 <option key={i} value={category}>{this.proper(category)}</option>
@@ -87,7 +87,7 @@ export default class InventoryForm extends React.Component{
 
 
     createRarityOptions = () => {
-        const rarity = ["Common", "Uncommon", "Rare", "Very Rare", "Import", "Exotic", "Black Market", "Premium", "Limited"];
+        const rarity = ["Common", "Uncommon", "Rare", "Very Rare", "Import", "Exotic", "Black Market", "Premium", "Limited"].sort();
         const rarityOptions = rarity.map((rare, i) => {
             return <option key={i} value={rare}>{this.proper(rare)}</option>
         })
@@ -95,7 +95,7 @@ export default class InventoryForm extends React.Component{
     }
 
     createCertifiedOptions = () => {
-        const certificationList = ["Acrobat", "Aviator", "Goalkeeper", "Guardian", "Juggler", "Paragon", "Playmaker", "Scorer", "Show-Off", "Sniper", "Striker", "Sweeper", "Tactician", "Turtle", "Victor"];
+        const certificationList = ["Acrobat", "Aviator", "Goalkeeper", "Guardian", "Juggler", "Paragon", "Playmaker", "Scorer", "Show-Off", "Sniper", "Striker", "Sweeper", "Tactician", "Turtle", "Victor"].sort();
         const certOptions = certificationList.map((cert, i) => {
             return <option key={i} value={cert}>{this.proper(cert)}</option>
         })
