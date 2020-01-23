@@ -14,6 +14,7 @@ import ContextManager from '../src/context/context-manager';
 import ItemsApiService from '../src/services/items-api-service';
 import UsersApiService from '../src/services/users-api-service';
 import TokenService from './services/token-service';
+import UserInfo from '../src/components/UserInfo/UserInfo';
 import './App.css';
 import EditProfileForm from './components/EditProfileForm/EditProfileForm';
 import AccountCreated from '../src/components/AccountCreated/AccountCreated';
@@ -117,6 +118,7 @@ class App extends React.Component{
           <Route exact path="/register" component={RegisterPage}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
           <Route exact path="/edit/stats" component={EditProfileForm}></Route>
+          <Route exact path="/userdata/:userid" component={UserInfo}></Route>
           <Route exact path="/add-inventory-item" component={InventoryForm}></Route>
           <Switch>
             <Route exact path="/logout" component={LogoutSuccessful}></Route>
