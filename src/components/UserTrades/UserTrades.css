@@ -78,6 +78,15 @@ label[for="search"]{
     padding: 3px;
 }
 
+.userdata-link{
+    text-decoration: none;
+}
+
+.userdata-link h3:hover{
+    background-color:#FAA41A;
+    color: rgb(2, 1, 10);
+}
+
 /*DESkTOP STYLES*/
 
 @media only screen and (min-width: 500px){
