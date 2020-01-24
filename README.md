@@ -40,7 +40,7 @@ Register:
 ![Register](src/imgs/screenshots/registration-form.png)
 
 Sign In:  
-![Sign In](src/imgs/screenshots/signin-form.png)
+![Sign In](src/imgs/screenshots/sigin-form.png)
 
 Dashboard:
 ![Dashboard](src/imgs/screenshots/dashboard.png)
