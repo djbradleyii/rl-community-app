@@ -26,7 +26,8 @@ class App extends React.Component{
       activeUserData: {},
       allItems: [],
       errorMessage: "",
-      successMessage: ""
+      successMessage: "",
+      loadingMessage: ""
     }
   }
 
@@ -69,6 +70,18 @@ class App extends React.Component{
     });
   }
 
+  updateLoadingMessage = (msg) => {
+    this.setState({
+      loadingMessage: msg
+    });
+  }
+
+  clearLoadingMessage = () => {
+    this.setState({
+      loadingMessage: null
+    });
+  }
+
   scrollToErrorMessage = () => {
     window.scrollTo(0, 0);
   }
@@ -87,6 +100,7 @@ class App extends React.Component{
   }
   
   componentDidMount(){
+    this.clearLoadingMessage();
     if(TokenService.hasAuthToken()){
       this.getActiveUsersStats();
       this.getAllItems();
@@ -97,6 +111,7 @@ class App extends React.Component{
     const contextValue = {
       errorMessage: this.state.errorMessage,
       successMessage: this.state.successMessage,
+      loadingMessage: this.state.loadingMessage,
       activeUserData: this.state.activeUserData,
       getActiveUsersStats: this.getActiveUsersStats,
       getAllItems: this.getAllItems,
@@ -105,6 +120,8 @@ class App extends React.Component{
       clearErrorMessage: this.clearErrorMessage,
       updateSuccessMessage: this.updateSuccessMessage,
       clearSuccessMessage: this.clearSuccessMessage,
+      updateLoadingMessage: this.updateLoadingMessage,
+      clearLoadingMessage: this.clearLoadingMessage,
       scrollToErrorMessage: this.scrollToErrorMessage
     }
     

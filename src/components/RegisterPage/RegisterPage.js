@@ -7,6 +7,7 @@ export default class RegisterPage extends React.Component{
     static contextType = ContextManager;
 
     handleSubmit = (e) => {
+        this.context.updateLoadingMessage("Loading...");
         this.context.clearErrorMessage();
         e.preventDefault();
 
@@ -50,6 +51,7 @@ export default class RegisterPage extends React.Component{
             passwordVerify.value = '';
             bio.value= '';
             this.context.clearErrorMessage();
+            this.context.clearLoadingMessage();
             history.push(`/registered`);
         })
         .catch(res => {
@@ -151,6 +153,7 @@ export default class RegisterPage extends React.Component{
                     <input type="password" id="passwordVerify" name="passwordVerify"  required/>
                 </div>
                 <div>
+                    {this.context.loadingMessage ? <div className="success-message">{this.context.loadingMessage}</div> : ""}
                     <button type="submit">Submit</button>
                 </div>    
         </form>

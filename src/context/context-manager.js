@@ -5,6 +5,7 @@ const ContextManager = React.createContext({
     allItems: [],
     errorMessage: "",
     successMessage: "",
+    loadingMessage: "",
     getActiveUsersStats: () => {},
     getAllItems: () => {},
     updateStatesTrades: () => {},
@@ -13,6 +14,8 @@ const ContextManager = React.createContext({
     clearErrorMessage: () => {},
     updateSuccessMessage: () => {},
     clearSuccessMessage: () => {},
+    updateLoadingMessage: () => {},
+    clearLoadingMessage: () => {},
     scrollToErrorMessage: () => {}
 });
 
