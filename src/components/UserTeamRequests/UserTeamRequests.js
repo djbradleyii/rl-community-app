@@ -15,10 +15,12 @@ export default class UserTeamRequests extends React.Component{
 
     getTeamCards = () => {
         const myRank = this.context.activeUserData.stats.rank;
+        const myPlatform = this.context.activeUserData.stats.platform;
         const myID = this.context.activeUserData.stats.id;
-        const teams = this.state.teams.filter((user) => {
-            return user.rank === myRank && user.id !== myID;
+        let teams = this.state.teams.filter((user) => {
+            return user.rank === myRank && user.id !== myID && user.platform === myPlatform;
         })
+        teams = teams.slice(0, 3);
         const teamCards = teams.map((user, i) => {
             return(
                 <article key={i} className="team-card">
