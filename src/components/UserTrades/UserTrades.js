@@ -22,6 +22,7 @@ export default class UserTrades extends React.Component{
             tradeDetails = this.context.allItems.filter((itemDetails) => {
                 return itemDetails.userid !== this.context.activeUserData.stats.id;
             })
+            tradeDetails = tradeDetails.slice(0, 3);
             tradeDetails = tradeDetails.map((itemDetails, i) => {
                 return(
                     <div key={i} className="trade-details">
