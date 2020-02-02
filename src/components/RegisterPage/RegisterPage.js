@@ -55,10 +55,12 @@ export default class RegisterPage extends React.Component{
             history.push(`/registered`);
         })
         .catch(res => {
+            this.context.clearLoadingMessage();
             this.context.updateErrorMessage('Oops: '+ res.error);
             this.context.scrollToErrorMessage();
         })
     } else {
+        this.context.clearLoadingMessage();
         this.context.updateErrorMessage('Password must match');
         this.context.scrollToErrorMessage();
     } 

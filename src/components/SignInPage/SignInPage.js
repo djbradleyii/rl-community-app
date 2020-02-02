@@ -9,6 +9,8 @@ import './SignInPage.css';
 export default class SignInPage extends React.Component{
     static contextType = ContextManager;
     handleSubmitJwtAuth = e => {
+        this.context.clearLoadingMessage();
+        this.context.clearErrorMessage();
         this.context.updateLoadingMessage("Loading...");
         e.preventDefault();
         this.setState({ error: null });
@@ -34,6 +36,7 @@ export default class SignInPage extends React.Component{
             })
          })
          .catch(res => {
+            this.context.clearLoadingMessage();
             this.context.updateErrorMessage('Oops: '+ res.error);
             this.context.scrollToErrorMessage();
          })
